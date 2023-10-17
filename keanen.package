@@ -1,6 +1,7 @@
 bash
-homebrew/cask/caffeine
+homebrew/cask/keepingyouawake
 homebrew/cask/obsidian
 homebrew/cask/microsoft-office
 homebrew/cask/balenaetcher
 p7zip
+homebrew/cask/drawio
