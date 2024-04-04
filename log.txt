@@ -1,0 +1,7 @@
+2024-04-04 - Changed the script to only use included .package files
+
+
+2023-07-27 - Added microsoft-teams
+2023-10-02 - Made the package names more explicit
+
+Added a feature that imports a list of packages from .package files so that we can have department or user specific package lists.

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Check if Homebrew is already installed
+# Check if Homebrew is already installed, if not, install it
 if ! command -v brew &> /dev/null; then
   echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -11,42 +11,25 @@ else
   brew update
 fi
 
-# List of packages to install with Homebrew
-# 2023-07-27 - Added microsoft-teams
-# 2023-10-02 - Made the package names more explicit
-packages=(
-homebrew/cask/zoom
-homebrew/cask/adobe-acrobat-reader
-homebrew/cask/google-drive
-homebrew/cask/google-chrome
-homebrew/cask/firefox
-homebrew/cask/microsoft-teams
-  # Add more packages to install here
-)
-
+# Initialize packages variable
+packages=""
 
 # Concatenate contents of all .package files and append to $packages.
-# Added so that we can have department or user specific package lists.
 for package_file in *.package; do
   echo "Adding packages from $package_file..."
   packages+=$'\n'"$(cat $package_file)"$'\n'
 done
 
+# Prompt user for confirmation
+read -p "The following packages will be installed: $packages. Do you want to continue? (y/n): " answer
 
-# Install the packages using Homebrew
-echo "Installing packages..."
-brew install $packages
+# Check user's response
+if [[ $answer == [Yy] ]]; then
+  # Install the packages using Homebrew
+  brew install $packages
 
-echo "All packages installed successfully."
-
-#for package in "${packages[@]}"; do
-  # 2023-10-2 Removed the upgrade command for each package, the install command does this automatically
-  #if brew list "$package" &>/dev/null; then
-	# 2023-07-27 - Changed behavior from skipping the package to updating it instead
-    #echo "$package is already installed. Skipping..."
-	#brew upgrade "$package"
-  #else
-    #brew install $packages
-    #brew upgrade
-  #fi
-#done
+  # Update all packages
+  brew upgrade
+else
+  echo "Installation aborted."
+fi
