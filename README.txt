@@ -27,5 +27,5 @@ The script should:
 	Check if Homebrew is installed, install it if not
 	Check if the desired packages are installed, install them if not
 
-If you want additional packages, create a text file with the file extension ".package" with a list of the desired packages, separated by line breaks. OR Add to the list of packages within the script.
+If you want additional packages, create a text file with the file extension ".package" with a list of the desired packages, separated by line breaks.
 They need to match the listed names in Homebrew's repository so make sure to search for the package first at: https://brew.sh
